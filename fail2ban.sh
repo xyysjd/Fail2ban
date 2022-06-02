@@ -53,12 +53,12 @@ echo "This Shell Script can protect your server from SSH attacks with the help o
 echo ""
 
 while :; do echo
-  read -p "Do you want to change your SSH Port? [y/n]: " IfChangeSSHPort
+  read -p "你想改变你的 SSH 端口吗? [y/n]: " IfChangeSSHPort
   if [ ${IfChangeSSHPort} == 'y' ]; then
     if [ -e "/etc/ssh/sshd_config" ];then
     [ -z "`grep ^Port /etc/ssh/sshd_config`" ] && ssh_port=22 || ssh_port=`grep ^Port /etc/ssh/sshd_config | awk '{print $2}'`
     while :; do echo
-        read -p "Please input SSH port(Default: $ssh_port): " SSH_PORT
+        read -p "请输入SSH端口(默认: $ssh_port): " SSH_PORT
         [ -z "$SSH_PORT" ] && SSH_PORT=$ssh_port
         if [ $SSH_PORT -eq 22 >/dev/null 2>&1 -o $SSH_PORT -gt 1024 >/dev/null 2>&1 -a $SSH_PORT -lt 65535 >/dev/null 2>&1 ];then
             break
@@ -81,9 +81,9 @@ while :; do echo
 done
 ssh_port=$SSH_PORT
 echo ""
-	read -p "Input the maximun times for trying [2-10]:  " maxretry
+	read -p "输入最大尝试次数 [2-10]:  " maxretry
 echo ""
-read -p "Input the lasting time for blocking a IP [hours]:  " bantime
+read -p "输入阻止IP的持续时间 [hours]:  " bantime
 if [ ${maxretry} == '' ]; then
 	maxretry=3
 fi
